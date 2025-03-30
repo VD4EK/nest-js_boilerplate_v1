@@ -2,6 +2,7 @@ import {Module} from "@nestjs/common"
 import {ConfigModule} from "@nestjs/config";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import { UsersModule } from './users/users.module';
+import { User } from './users/user.entity';
 import * as process from "node:process";
 
 if(!process.env.NODE_ENV){
@@ -23,8 +24,9 @@ if(!process.env.NODE_ENV){
           username: process.env.POSTGRES_USER,
           password: process.env.POSTGRES_PASSWORD,
           database: process.env.POSTGRES_DB,
-          entities: [],
+          entities: [User],
           autoLoadEntities: true,
+          synchronize: true,
       }),
       UsersModule
   ]
